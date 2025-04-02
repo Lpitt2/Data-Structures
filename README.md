@@ -9,16 +9,17 @@
 The purpose of this project is to implement and testbasic generic data structures within the C language. The list of data
 structures can be found at [https://www.geeksforgeeks.org/data-structures/](https://www.geeksforgeeks.org/data-structures/). The
 data structures are contained within header libraries. This project may be expanded upon or used for educational purposes without
-receiving explicit consent from the author.
+receiving explicit consent from the author. The website [https://makefiletutorial.com/](https://makefiletutorial.com/) was used to 
+create the makefile.
 
 ### Requirements:
 * Implement data structures through header files.
 * Test data strucutres.
 * Use dynamic memory allocation to create and destroy the data structure in memory.
-* Provide utilities for pushing, popping, and selecting when necessary and displaying always.
+* Build a system that can be extended to provide a generic framework for various data structures in C.
 * Maintain professional coding practices, including headers on the files, consistent naming, and testing.
 
-### General Structure:
+## General Structure:
 * *bin*
   * program
 * *src*
@@ -42,6 +43,22 @@ does not include any data structure implementation. The *makefile* should be run
 as it handles compiling the code. The *program* file only exists if the *makefile* has been run and contains the 
 executable code of the program.
 
+### Running the program.
+
+A make file is provided to make it easy to compile and run the program. As mentioned in the section *General Structure* above; 
+however, before running the make file, create a file called bin in the top-level directory as the make file requires this folder.
+
+## data structures
+
+This project implements three common data structures:
+ * Stack
+ * Queue
+ * Linked-List
+
+Each has its own node struct and functions that perform data structure specific operations for those nodes. Common
+functionallities that each data structure has include calculating the length of the data structure, creating a new node,
+appending (inserting) nodes, and popping (removing) nodes.
+
 ### Stack:
 
 Stacks are a form of data structure that follows the Last In First Out (**LIFO**) principles. This means that the last
@@ -54,9 +71,18 @@ top node. Nodes are pushed and popped to and from the top.
 
 ### Queue:
 
-Queues are simular to stacks, except they only grow. Queues follow the First In First Out (**FIFO**) principles meaning that the
-first node added to a queue is the first node to be removed from a queue. In this sense, the queue is always "growing" and 
+Queues are simular to stacks, except they only grow. Queues follow the First In First Out (**FIFO**) principles meaning that
+the first node added to a queue is the first node to be removed from a queue. In this sense, the queue is always "growing" and 
 shrinks by moving the root closer to the top of the queue. As with stacks, queues have two major components. The first 
 being the *QueueNode* which contains an ambigious pointer to the value and a pointer to the next node. The *Queue* itself
 contains two pointers, the first being a pointer to the *root node* and the second being a pointer to the *top node*. Nodes
 are pushed to the top and popped from the bottom.
+
+### List:
+
+Lists are conceptually simular to that of a train. Trains are made up of multiple cars (or nodes) that are connected to the car in 
+front and the car behind. The engine of the train does not have a car in front of it and the caboose does not connect to another 
+car after it. A person can exist in only one car at a time. If that person exists in car three, where one is the engine and five 
+is the caboose, would have to travel through car two to get to the engine since car two is connected to car three and the engine
+is connected only to car two. Unlike the previous two data structures, the list only contains a single struct called *ListNode*
+which contains an ambigious pointer to the value, and two pointers to the previous and next nodes within the list.
