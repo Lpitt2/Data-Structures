@@ -10,22 +10,46 @@
 #include "queue/queue.h"
 
 
+// Runs the tests for stack.
 void stack_driver();
 
+// Display the contents of an integer stack.
 void display_stack(struct Stack stack);
 
+// Display generic information about the stack.
 void display_stack_info(struct Stack stack);
 
+// Creates an integer stack node.
 struct StackNode* create_int_stack_node(int value);
 
 
+// Run the tests for queue.
 void queue_driver();
 
+// Display the contents of an integer queue.
 void display_queue(struct Queue queue);
 
+// Display generic information about the queue.
 void display_queue_info(struct Queue queue);
 
+// Creates an integer queue node.
 struct QueueNode *create_int_queue_node(int value);
+
+
+// Run the tests for list.
+void list_driver();
+
+// Display the value of a node and deallocate the node.
+void display_value_of_node_and_delete(struct ListNode* node);
+
+// Display the contents of a list.
+void display_list(struct ListNode *list);
+
+// Display generic information about the list.
+void display_list_info(struct ListNode *list);
+
+// Creates an integer list node.
+struct ListNode *create_int_list_node(int value);
 
 
 
@@ -40,6 +64,10 @@ int main()
   printf("\n\n\033[1;35mQUEUE DRIVER\033[1;0m\n\n");
   queue_driver();
 
+  // Test linked-lists.
+  printf("\n\n\033[1;35mLINKED-LIST DRIVER\033[1;0m\n\n");
+  list_driver();
+
   return 0;
 
 }
@@ -50,6 +78,7 @@ int main()
  *  Stack Testing Utilities.
 */
 
+// Runs the tests for stack.
 void stack_driver()
 {
 
@@ -159,11 +188,11 @@ void display_stack_info(struct Stack stack)
 {
 
   // Display the address of the root and the top of the stack.
-  printf("Address of root:  %p\n", stack.root);
-  printf("Address of top:   %p\n", stack.top);
+  printf("Address of root:    %p\n", stack.root);
+  printf("Address of top:     %p\n", stack.top);
 
   // Display the Length of the stack.
-  printf("Length:           %i\n", stack_length(stack));
+  printf("Length:             %i\n", stack_length(stack));
 
   // Display the contents of the stack.
   display_stack(stack);
@@ -173,17 +202,19 @@ void display_stack_info(struct Stack stack)
 
 }
 
-// Create an integer stack node.
+// Creates an integer stack node.
 struct StackNode* create_int_stack_node(int value)
 {
 
   // Declare variables.
-  struct StackNode* node = (struct StackNode*)(malloc(sizeof(struct StackNode)));
+  struct StackNode* node = NULL;
   int* ptr = (int*)(malloc(sizeof(int)));
 
-  // Assign the value to the node.
+  // Set the value of the node.
   (*ptr) = value;
-  (*node).value = ptr;
+
+  // Create the stack node.
+  node = create_stack_node(ptr);
 
   return node;
   
@@ -195,6 +226,7 @@ struct StackNode* create_int_stack_node(int value)
  * Queue Testing Utilities.
 */
 
+// Run the tests for queue.
 void queue_driver()
 {
 
@@ -247,6 +279,7 @@ void queue_driver()
 
 }
 
+// Display the contents of an integer queue.
 void display_queue(struct Queue queue)
 {
 
@@ -297,17 +330,26 @@ void display_queue(struct Queue queue)
 
 }
 
+// Display generic information about the queue.
 void display_queue_info(struct Queue queue)
 {
 
+  // Display the address of the top and bottom nodes.
+  printf("Address of bottom:  %p\n", queue.bottom);
+  printf("Address of top:     %p\n", queue.top);
+
+  // Display the length of the queue.
+  printf("Length:             %i\n", queue_length(queue));
+
   // Display the queue.
   display_queue(queue);
-  
+
   // Display linme separators.
   printf("\n\n");
 
 }
 
+// Creates an integer queue node.
 struct QueueNode *create_int_queue_node(int value)
 {
 
@@ -323,6 +365,199 @@ struct QueueNode *create_int_queue_node(int value)
 
   // Create the node.
   node = create_queue_node(ptr);
+
+  return node;
+
+}
+
+
+
+/*
+ * Linked-List Utilities.
+*/
+
+// Run the tests for list.
+void list_driver()
+{
+
+  // Create the root node.
+  struct ListNode *root = create_int_list_node(5);
+
+  // Display list information.
+  display_list_info(root);
+
+  // Create five more nodes into the list.
+  struct ListNode *node1 = create_int_list_node(10);
+  struct ListNode *node2 = create_int_list_node(15);
+  struct ListNode *node3 = create_int_list_node(20);
+  struct ListNode *node4 = create_int_list_node(25);
+  struct ListNode *node5 = create_int_list_node(30);
+
+  // Insert the five new nodes into the list.
+  list_insert(root, node1);
+  list_insert(node1, node2);
+  list_insert(node2, node3);
+  list_insert(node3, node4);
+  list_insert(node4, node5);
+
+  // Display list information.
+  display_list_info(root);
+
+  // Remove the last list node.
+  struct ListNode *node = list_remove(node5);
+
+  // Display the value of the removed node.
+  display_value_of_node_and_delete(node);
+  node = NULL;
+
+  // Display list information.
+  display_list_info(root);
+
+  // Remove a middle list node.
+  node = list_remove(node2);
+
+  // Displayt the value of the removed node.
+  display_value_of_node_and_delete(node);
+  node = NULL;
+
+  // Display list information.
+  display_list_info(root);
+
+  // Remove the root node.
+  node = list_remove(root);
+
+  // Display the value of the removed node.
+  display_value_of_node_and_delete(node);
+  node = NULL;
+
+  // Display the list information.
+  display_list_info(node1);
+
+  // Catch the removed node.
+  node = list_remove(node1);
+
+  // Display the value of the node.
+  display_value_of_node_and_delete(node);
+  node = NULL;
+
+  // Display the list information.
+  display_list_info(node3);
+
+  // Remove the last node.
+  node = list_remove(node4);
+
+  // Display the value of the node.
+  display_value_of_node_and_delete(node);
+  node = NULL;
+
+  // Display list information.
+  display_list_info(node3);
+
+  // Remove the final node.
+  node = list_remove(node3);
+
+  // Display the value of the node.
+  display_value_of_node_and_delete(node);
+  node = NULL;
+
+}
+
+// Display the value of a node and deallocate the node.
+void display_value_of_node_and_delete(struct ListNode* node)
+{
+
+  // Declare variables.
+  int* value = ((int*)((*node).value));
+
+  // Display the value of the node.
+  printf("Node Value: %i\n\n", (*value));
+
+  // Deallocate the value and node.
+  free(value);
+  free(node);
+
+}
+
+// Display the contents of a list.
+void display_list(struct ListNode *list)
+{
+
+  // Seek to the beginning.
+  while ((*list).previous != NULL)
+  {
+
+    // Seek to the previous node.
+    list = (*list).previous;
+
+  }
+
+  // Display an open square bracket.
+  printf("[ ");
+
+  // Determine if the list is empty.
+  if (list_length(list) == 0)
+  {
+
+    // Display the message 'EMPTY LIST'.
+    printf("EMPTY LIST ");
+
+  } else
+  {
+
+    // Iterate over every element within the list.
+    while ((*list).next != NULL)
+    {
+
+      // Display the current node.
+      printf("%i ", (*(int*)((*list).value)));
+
+      // Seek to the next node.
+      list = (*list).next;
+
+    }
+
+    // Display the final node.
+    printf("%i ", (*(int*)((*list).value)));
+
+  }
+
+  // Display a closing square bracket.
+  printf("]");
+
+}
+
+// Display generic information about the list.
+void display_list_info(struct ListNode *list)
+{
+
+  // Display the address of the current node.
+  printf("Address:            %p\n", list);
+
+  // Display length of list.
+  printf("Length:             %i\n", list_length(list));
+
+  // Display list.
+  display_list(list);
+
+  // Display separator.
+  printf("\n\n");
+
+}
+
+// Creates an integer list node.
+struct ListNode* create_int_list_node(int value)
+{
+
+  // Declare variables.
+  struct ListNode *node = NULL;
+  int *node_value = NULL;
+
+  // Allocate and set the value of the node.
+  node_value = ((int*)malloc(sizeof(int)));
+  (*node_value) = value;
+
+  // Add the integer value to the node.
+  node = create_list_node(node_value);
 
   return node;
 

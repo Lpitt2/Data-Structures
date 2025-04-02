@@ -4,11 +4,11 @@
 
 /*
  * Functions:
- *  - Stack create_stack(): Creates an empty stack.
- *  - StackNode* createNode(void* value): Creates a new stack node.
- *  - unsigned int stack_length(Stack): Returns the number of nodes within a stack.
- *  - void stack_push(Stack *, StackNode*): Pushes a node to a stack.
- *  - StackNode stack_pop(Stack *): Pops the top node from a stack.
+ *  - Stack create_stack():                        Creates an empty stack.
+ *  - StackNode* create_stack_node(void* value):   Creates a new stack node.
+ *  - unsigned int stack_length(Stack):            Returns the number of nodes within a stack.
+ *  - void stack_push(Stack*, StackNode*):         Pushes a node to a stack.
+ *  - StackNode stack_pop(Stack *):                Pops the top node from a stack.
 */
 
 #include <stdlib.h>
@@ -32,11 +32,14 @@ struct Stack create_stack()
 }
 
 // Creates a new stack node.
-struct StackNode* create_node(void* value)
+struct StackNode* create_stack_node(void* value)
 {
 
   // Declare variables.
-  struct StackNode* node = (struct StackNode*)(malloc(sizeof(struct StackNode)));
+  struct StackNode* node = NULL;
+  
+  // Allocate the new node.
+  node = (struct StackNode*)(malloc(sizeof(struct StackNode)));
 
   // Assign the value to the node.
   (*node).value = value;
@@ -54,28 +57,26 @@ unsigned int stack_length(struct Stack stack)
   struct StackNode current_node;
 
   // Ensure that the stack is not empty.
-  if (stack.top == NULL)
+  if (stack.top != NULL)
   {
     
-    return count;
+    // Get the top node.
+    current_node = (*stack.top);
 
-  }
+    // Set the counter to one to account for the top node.
+    count = 1;
 
-  // Get the top node.
-  current_node = (*stack.top);
+    // Iterate until the current node does not have a lower node.
+    while (current_node.previous != NULL)
+    {
 
-  // Set the counter to one to account for the top node.
-  count = 1;
+      // Increment the counter.
+      ++count;
 
-  // Iterate until the current node does not have a lower node.
-  while (current_node.previous != NULL)
-  {
+      // Seek to the next node.
+      current_node = (*current_node.previous);
 
-    // Increment the counter.
-    ++count;
-
-    // Seek to the next node.
-    current_node = (*current_node.previous);
+    }
 
   }
 
