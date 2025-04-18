@@ -16,10 +16,6 @@
 #ifndef __LINKED_LIST_H__
 #define __LINKED_LIST_H__
 
-#ifndef NULL
-#define NULL 0x0
-#endif
-
 
 // Represents a generic node within a linked-list.
 struct ListNode

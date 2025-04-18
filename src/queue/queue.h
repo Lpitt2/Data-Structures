@@ -18,10 +18,6 @@
 #ifndef __QUEUE_H__
 #define __QUEUE_H__
 
-#ifndef NULL
-#define NULL 0x0
-#endif
-
 
 // Represents a generic node within a queue.
 struct QueueNode

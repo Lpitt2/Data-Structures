@@ -12,6 +12,7 @@
 */
 
 #include <stdlib.h>
+#include <stddef.h>
 
 #include "stack.h"
 

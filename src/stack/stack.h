@@ -18,10 +18,6 @@
 #ifndef __STACK_H__
 #define __STACK_H__
 
-#ifndef NULL
-#define NULL 0x0
-#endif
-
 
 // Represents a generic node within a stack.
 struct StackNode
