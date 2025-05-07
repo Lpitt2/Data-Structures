@@ -98,4 +98,4 @@ attempting to find room 36 would have to travel 36 rooms down the hallway. In th
 has two doors. The door on the left is labelled rooms "1 - 50" whereas the other is labelled rooms "51 - 100". Upon entering 
 through the left door, the person discovers a room with two more doors the left labelled "1 - 25" with the other labelled "26 - 50".
 The pattern is continued for all rooms until an actual room that is not a hallway is reached. Ignoring the problems that physics 
-pose, the person would only have to travel through about seven doors to get to their destination.
+pose, the person would only have to travel through about seven doors to get to their destination. 

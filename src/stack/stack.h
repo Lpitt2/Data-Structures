@@ -13,7 +13,7 @@
  *  - unsigned int stack_length(Stack):            Returns the number of nodes within a stack.
  *  - void stack_push(Stack*, StackNode*):         Pushes a node to a stack.
  *  - StackNode stack_pop(Stack *):                Pops the top node from a stack.
-*/
+*/ 
 
 #ifndef __STACK_H__
 #define __STACK_H__
