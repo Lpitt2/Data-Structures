@@ -8,6 +8,7 @@
 #include "stack/stack.h"
 #include "list/list.h"
 #include "queue/queue.h"
+#include "binary_tree/binary_tree.h"
 
 
 // Runs the tests for stack.
@@ -52,6 +53,17 @@ void display_list_info(struct ListNode *list);
 struct ListNode *create_int_list_node(int value);
 
 
+// Run the tests for binary tree.
+void binary_tree_driver();
+
+// Creates an integer binary search tree node.
+struct BinaryTreeNode* create_int_binary_tree_node(int value);
+
+// Compares the values of two integer binary tree nodes.
+short binary_tree_int_compare(void* root_value, void* node_value);
+
+// Displays the elements of a binary tree node in transversal functions.
+void display_binary_tree_element(void* value);
 
 int main()
 {
@@ -67,6 +79,10 @@ int main()
   // Test linked-lists.
   printf("\n\n\033[1;35mLINKED-LIST DRIVER\033[1;0m\n\n");
   list_driver();
+
+  // Test Binary Tree.
+  printf("\n\n\033[1;35mBINARY TREE DRIVER\033[1;0m\n\n");
+  binary_tree_driver();
 
   return 0;
 
@@ -560,5 +576,172 @@ struct ListNode* create_int_list_node(int value)
   node = create_list_node(node_value);
 
   return node;
+
+}
+
+
+
+/*
+ * Binary Search Tree Utilities.
+*/
+
+void binary_tree_driver()
+{
+
+  // Declare the nodes.
+  struct BinaryTreeNode *root = create_int_binary_tree_node(5);
+  struct BinaryTreeNode *node1 = create_int_binary_tree_node(1);
+  struct BinaryTreeNode *node2 = create_int_binary_tree_node(2);
+  struct BinaryTreeNode *node3 = create_int_binary_tree_node(3);
+  struct BinaryTreeNode *node4 = create_int_binary_tree_node(4);
+  struct BinaryTreeNode *node6 = create_int_binary_tree_node(6);
+  struct BinaryTreeNode *node7 = create_int_binary_tree_node(7);
+  struct BinaryTreeNode *node8 = create_int_binary_tree_node(8);
+
+  int a = 1;
+  int b = 2;
+  int c = 0;
+
+  // Test comparison method.
+  printf ("Compare 1 and 1:  %i\n", binary_tree_int_compare(&a, &a));
+  printf ("Compare 1 and 2:  %i\n", binary_tree_int_compare(&a, &b));
+  printf ("Compare 1 and 0:  %i\n\n", binary_tree_int_compare(&a, &c));
+
+  // Perform the inorder display of the nodes.
+  printf ("Root:     [ ");
+  transverse_binary_tree_inorder(root, &display_binary_tree_element);
+  printf ("]\n");
+
+  // Insert the node (2) to the root.
+  binary_tree_insert(root, node2, &binary_tree_int_compare);
+
+  // Perform the inorder display of the nodes.
+  printf ("Insert 2: [ ");
+  transverse_binary_tree_inorder(root, &display_binary_tree_element);
+  printf ("]\n");
+
+  // Insert the node (4) to the root.
+  binary_tree_insert(root, node4, &binary_tree_int_compare);
+
+  // Perform the inorder display of the nodes.
+  printf ("Insert 4: [ ");
+  transverse_binary_tree_inorder(root, &display_binary_tree_element);
+  printf ("]\n");
+
+  // Insert the node (1) to the root.
+  binary_tree_insert(root, node1, &binary_tree_int_compare);
+
+  // Perform the inorder display of the nodes.
+  printf ("Insert 1: [ ");
+  transverse_binary_tree_inorder(root, &display_binary_tree_element);
+  printf ("]\n");
+
+  // Insert the node (6) to the root.
+  binary_tree_insert(root, node6, &binary_tree_int_compare);
+
+  // Perform the inorder display of the nodes.
+  printf ("Insert 6: [ ");
+  transverse_binary_tree_inorder(root, &display_binary_tree_element);
+  printf ("]\n");
+
+  // Insert the node (3) to the root.
+  binary_tree_insert(root, node3, &binary_tree_int_compare);
+
+  // Perform the inorder display of the nodes.
+  printf ("Insert 3: [ ");
+  transverse_binary_tree_inorder(root, &display_binary_tree_element);
+  printf ("]\n");
+
+  // Insert the node (8) to the root.
+  binary_tree_insert(root, node8, &binary_tree_int_compare);
+
+  // Perform the inorder display of the nodes.
+  printf ("Insert 8: [ ");
+  transverse_binary_tree_inorder(root, &display_binary_tree_element);
+  printf ("]\n");
+
+  // Insert the node (7) to the root.
+  binary_tree_insert(root, node7, &binary_tree_int_compare);
+
+  // Perform the inorder display of the nodes.
+  printf ("Insert 7: [ ");
+  transverse_binary_tree_inorder(root, &display_binary_tree_element);
+  printf ("]\n");
+
+  // Perform preorder transversal.
+  printf ("\nPreorder Transversal: [ ");
+  transverse_binary_tree_preorder(root, &display_binary_tree_element);
+  printf ("]\n");
+
+  // Perform postorder transversal.
+  printf ("\nPostorder Transversal: [ ");
+  transverse_binary_tree_postorder(root, &display_binary_tree_element);
+  printf ("]\n");
+
+}
+
+// Creates an integer binary search tree node.
+struct BinaryTreeNode* create_int_binary_tree_node(int value)
+{
+
+  // Declare variables.
+  int *ptr = NULL;
+
+  // Dynamically allocate the integer value.
+  ptr = (int*)(malloc(sizeof(int)));
+  (*ptr) = value;
+
+  return create_binary_tree_node(ptr);
+
+}
+
+signed short binary_tree_int_compare(void* root_value, void* node_value)
+{
+
+  // Declare variables.
+  int root;
+  int node;
+  signed short result = 0;
+
+  // Ensure that the root and node values are not null.
+  if (root_value == NULL || node_value == NULL)
+  {
+    return 0;
+  }
+   
+  // Convert the values to integers.
+  root = (*(int*)(root_value));
+  node = (*(int*)(node_value));
+
+  // Perform the comparison.
+  if (root > node)
+  {
+    result = -1;
+  } else if (root < node) {
+    result = 1;
+  }
+
+  return result;
+
+}
+
+// Displays the elements of a binary tree node in transversal functions.
+void display_binary_tree_element(void* value)
+{
+
+  // Declare variables.
+  int *ptr;
+
+  // Ensure that the address of the value is not null.
+  if (value == NULL)
+  {
+    return;
+  }
+
+  // Convert the value into a pointer.
+  ptr = (int*)(value);
+
+  // Display the value.
+  printf ("%i ", (*ptr));
 
 }

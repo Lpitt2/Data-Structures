@@ -86,3 +86,16 @@ car after it. A person can exist in only one car at a time. If that person exist
 is the caboose, would have to travel through car two to get to the engine since car two is connected to car three and the engine
 is connected only to car two. Unlike the previous two data structures, the list only contains a single struct called *ListNode*
 which contains an ambigious pointer to the value, and two pointers to the previous and next nodes within the list.
+
+### Binary Search Tree:
+
+Binary search trees are a form of binary tree that has the added requirement of the left element must be less then the root and the
+right element must be greater than the root. The benefit of using a binary search tree is that searching for elements is at best
+O(lb(n)), refered to as logarithmic, time complexity (source:  [https://www.geeksforgeeks.org/complexity-different-operations-binary-tree-binary-search-tree-avl-tree/](https://www.geeksforgeeks.org/complexity-different-operations-binary-tree-binary-search-tree-avl-tree/)). One can think of a binary search tree
+as someone searching for a room down a hallway. The rooms in this hallway would be numbered sequentially. The room closest to the 
+stairs is one, the next room is two, the room after that is three. This pattern continues on to the end of the hallway. A person 
+attempting to find room 36 would have to travel 36 rooms down the hallway. In the case of a binary tree, we assume that the halway 
+has two doors. The door on the left is labelled rooms "1 - 50" whereas the other is labelled rooms "51 - 100". Upon entering 
+through the left door, the person discovers a room with two more doors the left labelled "1 - 25" with the other labelled "26 - 50".
+The pattern is continued for all rooms until an actual room that is not a hallway is reached. Ignoring the problems that physics 
+pose, the person would only have to travel through about seven doors to get to their destination. 
