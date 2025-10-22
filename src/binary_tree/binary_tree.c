@@ -9,6 +9,7 @@
  *  - void transverse_binary_tree_preorder(BinaryTreeNode*, binary_tree_transversal_function):   Performs preorder transversal of a binary search tree in the form of preorder.
  *  - void transverse_binary_tree_postorder(BinaryTreeNode*, binary_tree_transversal_function):  Performs postorder transversal of a binary search tree in the form of postorder.
  *  - void transverse_binary_tree_inorder(BinaryTreeNode*, binary_tree_transversal_function):    Performs inorder transversal of a binary search tree in the form of inorder.
+ *  - void reverse_binary_tree(struct BinaryTreeNode *root):                                     Switches the sides that elements are on in a binary tree.
 */
 
 #include <stddef.h>
@@ -188,5 +189,43 @@ void transverse_binary_tree_inorder(struct BinaryTreeNode *root, binary_tree_tra
     transverse_binary_tree_inorder((*root).right, node_transversal_function);
 
   }
+
+}
+
+// Switches the sides that elements are on in a binary tree.
+void reverse_binary_tree(struct BinaryTreeNode *root)
+{
+
+  // Declare local variables.
+  struct BinaryTreeNode *temp = NULL;
+
+  // Ensure that the root is not null.
+  if (root == NULL)
+  {
+    return;
+  }
+
+  // Determine if there is a left node.
+  if ((*root).left != NULL)
+  {
+
+    // Perform pre-order transversal of the left node.
+    reverse_binary_tree((*root).left);
+
+  }
+
+  // Determine if there is a right node.
+  if ((*root).right != NULL)
+  {
+
+    // Perform post-order transversal of the right node.
+    reverse_binary_tree((*root).right);
+
+  }
+
+  // Swap the nodes.
+  temp = (*root).left;
+  (*root).left = (*root).right;
+  (*root).right = temp;
 
 }

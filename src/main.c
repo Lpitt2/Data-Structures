@@ -678,6 +678,14 @@ void binary_tree_driver()
   transverse_binary_tree_postorder(root, &display_binary_tree_element);
   printf ("]\n");
 
+  // Reverse the binary tree.
+  reverse_binary_tree(root);
+
+  // Display the inorder transversal of the binary tree.
+  printf("\nReversed Binary Tree (Inorder Transversal): [ ");
+  transverse_binary_tree_inorder(root, &display_binary_tree_element);
+  printf("]\n");
+
 }
 
 // Creates an integer binary search tree node.
